@@ -78,7 +78,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
                         resource = open("./www" + path + "/index.html")
 
                         self.request.send("HTTP/1.1 301 Moved Permanently \n".encode())
-                        self.request.sendall(("HTTP://127.0.0.1:8080" + path).encode())
+                        self.request.sendall(("HTTP://127.0.0.1:8080" + path + "\n").encode())
                     except:
                         self.request.send("HTTP/1.1 404 Not Found \n".encode())
                 
