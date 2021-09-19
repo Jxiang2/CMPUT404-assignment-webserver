@@ -38,7 +38,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
     
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        print ("Got a request of: %s\n" % self.data)
+        #print ("Got a request of: %s\n" % self.data)
 
         '''
         The data string is:  GET / HTTP/1.1
@@ -49,9 +49,9 @@ class MyWebServer(socketserver.BaseRequestHandler):
         '''
 
         data_string = self.data.decode()
-        print("###################")
-        print("The data string is: ", data_string)
-        print("###################")
+        #print("###################")
+        #print("The data string is: ", data_string)
+        #print("###################")
 
         assert (data_string != None), ("HTTP/1.1 400 Bad Request \n".encode())
         http_method, path = (data_string.split()[0], data_string.split()[1])
