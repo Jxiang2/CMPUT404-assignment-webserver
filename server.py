@@ -60,22 +60,22 @@ class MyWebServer(socketserver.BaseRequestHandler):
         real_path = os.getcwd() + "/www"
         if http_method == "GET":
             if os.path.realpath(real_path + path).startswith(real_path):
-                if os.path.exists(real_path + "/index.html") and path.endswith("/"):
+                if os.path.exists(real_path) and path.endswith("/"):
                     resource = open(real_path + "/index.html").read()
                     format = "html"
                     self.successful_send(resource, format)
 
-                elif os.path.exists("./www" + path) and path.endswith(".html"):
-                    resource = open("./www" + path).read()
+                elif os.path.exists(real_path + path) and path.endswith(".html"):
+                    resource = open(real_path + path).read()
                     self.successful_send(resource, format="html")
 
-                elif os.path.exists("./www" + path) and path.endswith(".css"):
-                    resource = open("./www" + path).read()
+                elif os.path.exists(real_path + path) and path.endswith(".css"):
+                    resource = open(real_path + path).read()
                     self.successful_send(resource, format="css")
 
                 else:
                     try:
-                        resource = open("./www" + path + "/index.html")
+                        resource = open(real_path + path + "/index.html")
 
                         self.request.send("HTTP/1.1 301 Moved Permanently \n".encode())
                         self.request.sendall(("HTTP://127.0.0.1:8080" + path + "\n").encode())
